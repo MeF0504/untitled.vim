@@ -1,6 +1,6 @@
 # Untitled.vim
 
-This is [Project Sekai](https://pjsekai.sega.jp/) inspired vim plugin.
+This is [Project Sekai](https://pjsekai.sega.jp/) inspired __unofficial__ vim plugin.
 
 <!-- ![Untitled](images/untitled.gif) -->
 <img src=images/untitled.gif width="70%">
