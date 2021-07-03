@@ -7,15 +7,16 @@ This is [Project Sekai](https://pjsekai.sega.jp/) inspired __unofficial__ vim pl
 
 ## Requirements
 
-- random number generator
+- **random number generator** or **reltime**
 ```vim
 echo exists('*rand') " == 1
+" or
+echo has('reltime')  " == 1
 ```
-- popup window
+- **popup window** for vim
 ```vim
 echo has('popupwin')  " == 1
 ```
-___NeoVim is not supported yet___
 
 ## Installation
 
