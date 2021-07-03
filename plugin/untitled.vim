@@ -7,7 +7,7 @@ if exists('g:loaded_untitled')
 endif
 let g:loaded_untitled = 1
 
-if !exists('*popup_create')
+if !has('popupwin') || !has('nvim')
     finish
 endif
 
