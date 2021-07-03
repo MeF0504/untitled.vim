@@ -10,7 +10,8 @@ let g:loaded_untitled = 1
 if !exists('*popup_create')
     finish
 endif
-if !exists('*rand')
+
+if !exists('*rand') || !has('reltime')
     finish
 endif
 

@@ -2,7 +2,7 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 " GitHub:       https://github.com/MeF0504/
-" Version:      0.1.0
+" Version:      0.2.0
 
 " initialization
 let s:debug = 0
@@ -99,11 +99,25 @@ function! s:set_colors()
     highlight Triang12 ctermfg=229 ctermbg=None guifg=Yellow guibg=NONE
 endfunction
 
+function! s:local_rand()
+    if exists('*rand')
+        return rand()
+    elseif has('reltime')
+        " https://vim-jp.org/vim-users-jp/2009/11/05/Hack-98.html
+        let match_end = matchend(reltimestr(reltime()), '\d\+\.')+1
+        let rand_num = str2nr(reltimestr(reltime())[l:match_end:])
+        return rand_num
+    else
+        " no way...
+        return 0
+    endif
+endfunction
+
 function! s:normal(mean, std)
     " Box-Mueller's method
     let pi = 3.14159265
-    let X = rand()%100/100.0
-    let Y = rand()%100/100.0
+    let X = s:local_rand()%100/100.0
+    let Y = s:local_rand()%100/100.0
     let Z = sqrt(-2*log(X))*cos(2*pi*Y)
     return a:mean+a:std*Z
 endfunction
@@ -195,12 +209,12 @@ function! untitled#untitled()
 
         if (tri_mode==1) || (tri_mode==2)
             for j in range(10, 79)
-                let hi_rand = rand()%3
                 let pop_dict = #{
                             \ highlight: 'Triang1'.hi_rand,
                             \ line: float2nr(s:normal(&lines-float2nr(i*line_times)-8, &lines/5)),
                             \ col:  float2nr(s:normal(&columns-float2nr(i*col_times)-24, &columns/5)),
                             \ zindex: 150,
+                let hi_rand = s:local_rand()%3
                             \ }
                 execute "let s:popid".j." = popup_create(s:tri_sample".j/10."0, pop_dict)"
             endfor
@@ -228,7 +242,7 @@ function! untitled#untitled()
         echo "line:".&lines." vs columns:".&columns." div;".&columns/&lines
     endif
 
-    let col_rand = rand()%len(g:untitled_sekai_color_scheme)
     execute 'colorscheme '.g:untitled_sekai_color_scheme[col_rand]
+    let col_rand = s:local_rand()%len(g:untitled_sekai_color_scheme)
 
 endfunction
