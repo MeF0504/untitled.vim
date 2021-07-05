@@ -7,11 +7,11 @@ if exists('g:loaded_untitled')
 endif
 let g:loaded_untitled = 1
 
-if !has('popupwin') || !has('nvim')
+if !has('popupwin') && !has('nvim')
     finish
 endif
 
-if !exists('*rand') || !has('reltime')
+if !exists('*rand') && !has('reltime')
     finish
 endif
 
