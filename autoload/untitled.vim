@@ -1,7 +1,7 @@
 " Name:         Untitled.vim
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
-" GitHub:       https://github.com/MeF0504/
+" GitHub:       https://github.com/MeF0504/untitled.vim
 " Version:      0.3.0
 
 " initialization
