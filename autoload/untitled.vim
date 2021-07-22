@@ -5,7 +5,9 @@
 " Version:      0.3.0
 
 " initialization
+""" DEBUG START
 let s:debug = 0
+""" DEBUG END
 let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
             \ 'pjsekai_leo_need',
             \ 'pjsekai_more_more_jump',
@@ -281,6 +283,7 @@ function! untitled#untitled()
 
         redraw!
         sleep 60ms
+        """ DEBUG START
         if s:debug
             let pos_info = ""
             for i in range(100)
@@ -291,6 +294,7 @@ function! untitled#untitled()
             echo pos_info
             call input('::')
         endif
+        """ DEBUG END
         for i in range(80)
             if exists('s:popid'.i) && has('popupwin')
                 execute 'call popup_close(s:popid'.i.')'
@@ -304,9 +308,11 @@ function! untitled#untitled()
         endif
     endfor
 
+    """ DEBUG START
     if s:debug
         echo "line:".&lines." vs columns:".&columns." div;".&columns/&lines
     endif
+    """ DEBUG END
 
     let col_rand = s:local_rand()%len(g:untitled_sekai_color_scheme)
     execute 'silent colorscheme '.g:untitled_sekai_color_scheme[col_rand]
