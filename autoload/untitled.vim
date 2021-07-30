@@ -12,6 +12,9 @@ let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
             \ 'pjsekai_wonderlands_showtime',
             \ 'pjsekai_25ji_nightcode_de',
             \ ])
+""" DEBUG START
+let s:debug = 1
+""" DEBUG END
 
 " displayed characters
 let s:tri_sample0 =<< EOL
@@ -83,6 +86,15 @@ let s:tri_sample50 = '⊿'
 let s:tri_sample60 = '▲'
 let s:tri_sample70 = '△'
 
+""" DEBUG START
+if s:debug
+    for i in range(10)
+        if exists('s:tri_sample'.i)
+            execute 'let s:tri_sample'.i.'[0] = substitute(s:tri_sample'.i.'[0], "|", "'.i.'", "")'
+        endif
+    endfor
+endif
+""" DEBUG END
 function! s:set_colors()
     " highlight settings
     highlight Triang0  ctermfg=229 ctermbg=None guifg=Yellow guibg=NONE
@@ -280,6 +292,18 @@ function! untitled#untitled()
 
         redraw!
         sleep 60ms
+        """ DEBUG START
+        if s:debug
+            let pos_info = ""
+            for i in range(100)
+                if exists('line'.i) && exists('col'.i)
+                    execute "let pos_info .= '".i."['.line".i.".'-'.col".i.".'] '"
+                endif
+            endfor
+            echo pos_info
+            call input('::')
+        endif
+        """ DEBUG END
         for i in range(80)
             if exists('s:popid'.i) && has('popupwin')
                 execute 'call popup_close(s:popid'.i.')'
@@ -293,7 +317,12 @@ function! untitled#untitled()
         endif
     endfor
 
+    """ DEBUG START
+    if s:debug
+        echo "line:".&lines." vs columns:".&columns." div;".&columns/&lines
+    endif
 
+    """ DEBUG END
     let col_rand = s:local_rand()%len(g:untitled_sekai_color_scheme)
     execute 'silent colorscheme '.g:untitled_sekai_color_scheme[col_rand]
 
