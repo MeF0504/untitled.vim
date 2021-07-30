@@ -2,7 +2,7 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 " GitHub:       https://github.com/MeF0504/untitled.vim
-" Version:      0.3.0
+" Version:      0.4.1
 
 " initialization
 let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
@@ -12,89 +12,11 @@ let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
             \ 'pjsekai_wonderlands_showtime',
             \ 'pjsekai_25ji_nightcode_de',
             \ ])
+let s:popid = {}
 """ DEBUG START
 let s:debug = 1
 """ DEBUG END
 
-" displayed characters
-let s:tri_sample0 =<< EOL
-|\
-|  \
-|    \
-|    /
-|  /
-|/
-EOL
-
-let s:tri_sample1 =<< EOL
-    /|
-  /  |
-/    |
-\    |
-  \  |
-    \|
-EOL
-
-let s:tri_sample2 =<< EOL
-|\
-|||\
-|||/
-|/
-EOL
-
-let s:tri_sample3 =<< EOL
-|\
-|  \
-|  /
-|/
-EOL
-
-let s:tri_sample4 =<< EOL
-  /|
-/|||
-\|||
-  \|
-EOL
-
-let s:tri_sample5 =<< EOL
-  /|
-/  |
-\  |
-  \|
-EOL
-
-let s:tri_sample6 =<< EOL
-|\
-|  \
-|    \
-|______\
-EOL
-
-let s:tri_sample7 =<< EOL
-    /|
-   / |
-  /  |
- /   |
-/____|
-EOL
-
-let s:tri_sample10 = '▶'
-let s:tri_sample20 = '▷'
-let s:tri_sample30 = '◀'
-let s:tri_sample40 = '◁'
-let s:tri_sample50 = '⊿'
-let s:tri_sample60 = '▲'
-let s:tri_sample70 = '△'
-
-""" DEBUG START
-if s:debug
-    for i in range(10)
-        if exists('s:tri_sample'.i)
-            execute 'let s:tri_sample'.i.'[0] = substitute(s:tri_sample'.i.'[0], "|", "'.i.'", "")'
-        endif
-    endfor
-endif
-""" DEBUG END
 function! s:set_colors()
     " highlight settings
     highlight Triang0  ctermfg=229 ctermbg=None guifg=Yellow guibg=NONE
@@ -187,11 +109,11 @@ function! s:display_tri(id, tri, config)
             execute "let bufnr = s:bufnr".a:id
         endif
 
-        if !exists("s:popid".a:id)
+        if !has_key(s:popid, a:id)
             let popid = nvim_open_win(bufnr, v:false, config)
             call win_execute(popid, "set winhighlight=Normal:".a:config['highlight'])
         else
-            execute "let popid = s:popid".a:id
+            let popid = s:popid[a:id]
             call nvim_win_set_config(popid, config)
         endif
     endif
@@ -221,113 +143,132 @@ function! untitled#untitled()
     let pos7 = [0.14, 0.34, 0.5, 0.69]
     for i in range(tri_iter)
         if (tri_mode==0) || (tri_mode==1)
-            " let line0 = &lines-float2nr(i*line_times)-16
-            " let col0  = &columns-float2nr(i*col_times)-21
-            let line0 = &lines-float2nr((&lines-len(s:tri_sample0))*(pos0[0]+i*(pos0[2]-pos0[0])/(tri_iter-1)))
-            let col0  = &columns-float2nr((&columns-len(s:tri_sample0[0]))*(pos0[1]+i*(pos0[3]-pos0[1])/(tri_iter-1)))
-            let conf0 = {
-                        \ "highlight": 'Triang0',
-                        \ "line": line0,
-                        \ "col":  col0,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid0 = s:display_tri(0, s:tri_sample0, conf0)
+            for j in range(8)
+                let tri_sample = untitled#chars#get_tri(j)
+                execute "let pos = pos".j
+                let line = &lines-float2nr((&lines-len(tri_sample))*(pos[0]+i*(pos[2]-pos[0])/(tri_iter-1)))
+                let col  = &columns-float2nr((&columns-len(tri_sample[0]))*(pos[1]+i*(pos[3]-pos[1])/(tri_iter-1)))
+                let conf = {
+                            \ "highlight": 'Triang'.j,
+                            \ "line": line,
+                            \ "col":  col,
+                            \ "pos": "botright",
+                            \ "zindex": 100,
+                            \ }
+                let s:popid[j] = s:display_tri(j, tri_sample, conf)
+            endfor
+            """ DEBUG START
+            " {{{
+            " " let line0 = &lines-float2nr(i*line_times)-16
+            " " let col0  = &columns-float2nr(i*col_times)-21
+            " let line0 = &lines-float2nr((&lines-len(s:tri_sample0))*(pos0[0]+i*(pos0[2]-pos0[0])/(tri_iter-1)))
+            " let col0  = &columns-float2nr((&columns-len(s:tri_sample0[0]))*(pos0[1]+i*(pos0[3]-pos0[1])/(tri_iter-1)))
+            " let conf0 = {
+            "             \ "highlight": 'Triang0',
+            "             \ "line": line0,
+            "             \ "col":  col0,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid0 = s:display_tri(0, s:tri_sample0, conf0)
 
-            " let line1 = &lines-float2nr(i*line_times)-6
-            " let col1  = &columns-float2nr(i*col_times)-6
-            let line1 = &lines-float2nr((&lines-len(s:tri_sample1))*(pos1[0]+i*(pos1[2]-pos1[0])/(tri_iter-1)))
-            let col1  = &columns-float2nr((&columns-len(s:tri_sample1[0]))*(pos1[1]+i*(pos1[3]-pos1[1])/(tri_iter-1)))
-            let conf1 = {
-                        \ "highlight": 'Triang1',
-                        \ "line": line1,
-                        \ "col":  col1,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid1 = s:display_tri(1, s:tri_sample1, conf1)
+            " " let line1 = &lines-float2nr(i*line_times)-6
+            " " let col1  = &columns-float2nr(i*col_times)-6
+            " let line1 = &lines-float2nr((&lines-len(s:tri_sample1))*(pos1[0]+i*(pos1[2]-pos1[0])/(tri_iter-1)))
+            " let col1  = &columns-float2nr((&columns-len(s:tri_sample1[0]))*(pos1[1]+i*(pos1[3]-pos1[1])/(tri_iter-1)))
+            " let conf1 = {
+            "             \ "highlight": 'Triang1',
+            "             \ "line": line1,
+            "             \ "col":  col1,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid1 = s:display_tri(1, s:tri_sample1, conf1)
 
-            " let line2 = &lines-float2nr(i*line_times)-10
-            " let col2  = &columns-float2nr(i*col_times)-42
-            let line2 = &lines-float2nr((&lines-len(s:tri_sample2))*(pos2[0]+i*(pos2[2]-pos2[0])/(tri_iter-1)))
-            let col2  = &columns-float2nr((&columns-len(s:tri_sample2[0]))*(pos2[1]+i*(pos2[3]-pos2[1])/(tri_iter-1)))
-            let conf2 = {
-                        \ "highlight": 'Triang2',
-                        \ "line": line2,
-                        \ "col":  col2,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid2 = s:display_tri(2, s:tri_sample2, conf2)
+            " " let line2 = &lines-float2nr(i*line_times)-10
+            " " let col2  = &columns-float2nr(i*col_times)-42
+            " let line2 = &lines-float2nr((&lines-len(s:tri_sample2))*(pos2[0]+i*(pos2[2]-pos2[0])/(tri_iter-1)))
+            " let col2  = &columns-float2nr((&columns-len(s:tri_sample2[0]))*(pos2[1]+i*(pos2[3]-pos2[1])/(tri_iter-1)))
+            " let conf2 = {
+            "             \ "highlight": 'Triang2',
+            "             \ "line": line2,
+            "             \ "col":  col2,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid2 = s:display_tri(2, s:tri_sample2, conf2)
 
-            " let line3 = &lines-float2nr(i*line_times)-8
-            " let col3  = &columns-float2nr(i*col_times)-19
-            let line3 = &lines-float2nr((&lines-len(s:tri_sample3))*(pos3[0]+i*(pos3[2]-pos3[0])/(tri_iter-1)))
-            let col3  = &columns-float2nr((&columns-len(s:tri_sample3[0]))*(pos3[1]+i*(pos3[3]-pos3[1])/(tri_iter-1)))
-            let conf3 = {
-                        \ "highlight": 'Triang3',
-                        \ "line": line3,
-                        \ "col":  col3,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid3 = s:display_tri(3, s:tri_sample3, conf3)
+            " " let line3 = &lines-float2nr(i*line_times)-8
+            " " let col3  = &columns-float2nr(i*col_times)-19
+            " let line3 = &lines-float2nr((&lines-len(s:tri_sample3))*(pos3[0]+i*(pos3[2]-pos3[0])/(tri_iter-1)))
+            " let col3  = &columns-float2nr((&columns-len(s:tri_sample3[0]))*(pos3[1]+i*(pos3[3]-pos3[1])/(tri_iter-1)))
+            " let conf3 = {
+            "             \ "highlight": 'Triang3',
+            "             \ "line": line3,
+            "             \ "col":  col3,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid3 = s:display_tri(3, s:tri_sample3, conf3)
 
-            " let line4 = &lines-float2nr(i*line_times)-13
-            " let col4  = &columns-float2nr(i*col_times)-13
-            let line4 = &lines-float2nr((&lines-len(s:tri_sample4))*(pos4[0]+i*(pos4[2]-pos4[0])/(tri_iter-1)))
-            let col4  = &columns-float2nr((&columns-len(s:tri_sample4[0]))*(pos4[1]+i*(pos4[3]-pos4[1])/(tri_iter-1)))
-            let conf4 = {
-                        \ "highlight": 'Triang4',
-                        \ "line": line4,
-                        \ "col":  col4,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid4 = s:display_tri(4, s:tri_sample4, conf4)
+            " " let line4 = &lines-float2nr(i*line_times)-13
+            " " let col4  = &columns-float2nr(i*col_times)-13
+            " let line4 = &lines-float2nr((&lines-len(s:tri_sample4))*(pos4[0]+i*(pos4[2]-pos4[0])/(tri_iter-1)))
+            " let col4  = &columns-float2nr((&columns-len(s:tri_sample4[0]))*(pos4[1]+i*(pos4[3]-pos4[1])/(tri_iter-1)))
+            " let conf4 = {
+            "             \ "highlight": 'Triang4',
+            "             \ "line": line4,
+            "             \ "col":  col4,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid4 = s:display_tri(4, s:tri_sample4, conf4)
 
-            " let line5 = &lines-float2nr(i*line_times)-14
-            " let col5  = &columns-float2nr(i*col_times)-48
-            let line5 = &lines-float2nr((&lines-len(s:tri_sample5))*(pos5[0]+i*(pos5[2]-pos5[0])/(tri_iter-1)))
-            let col5  = &columns-float2nr((&columns-len(s:tri_sample5[0]))*(pos5[1]+i*(pos5[3]-pos5[1])/(tri_iter-1)))
-            let conf5 = {
-                        \ "highlight": 'Triang5',
-                        \ "line": line5,
-                        \ "col":  col5,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid5 = s:display_tri(5, s:tri_sample5, conf5)
+            " " let line5 = &lines-float2nr(i*line_times)-14
+            " " let col5  = &columns-float2nr(i*col_times)-48
+            " let line5 = &lines-float2nr((&lines-len(s:tri_sample5))*(pos5[0]+i*(pos5[2]-pos5[0])/(tri_iter-1)))
+            " let col5  = &columns-float2nr((&columns-len(s:tri_sample5[0]))*(pos5[1]+i*(pos5[3]-pos5[1])/(tri_iter-1)))
+            " let conf5 = {
+            "             \ "highlight": 'Triang5',
+            "             \ "line": line5,
+            "             \ "col":  col5,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid5 = s:display_tri(5, s:tri_sample5, conf5)
 
-            " let line6 = &lines-float2nr(i*line_times)-13
-            " let col6  = &columns-float2nr(i*col_times)-34
-            let line6 = &lines-float2nr((&lines-len(s:tri_sample6))*(pos6[0]+i*(pos6[2]-pos6[0])/(tri_iter-1)))
-            let col6  = &columns-float2nr((&columns-len(s:tri_sample6[0]))*(pos6[1]+i*(pos6[3]-pos6[1])/(tri_iter-1)))
-            let conf6 = {
-                        \ "highlight": 'Triang6',
-                        \ "line": line6,
-                        \ "col":  col6,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid6 = s:display_tri(6, s:tri_sample6, conf6)
+            " " let line6 = &lines-float2nr(i*line_times)-13
+            " " let col6  = &columns-float2nr(i*col_times)-34
+            " let line6 = &lines-float2nr((&lines-len(s:tri_sample6))*(pos6[0]+i*(pos6[2]-pos6[0])/(tri_iter-1)))
+            " let col6  = &columns-float2nr((&columns-len(s:tri_sample6[0]))*(pos6[1]+i*(pos6[3]-pos6[1])/(tri_iter-1)))
+            " let conf6 = {
+            "             \ "highlight": 'Triang6',
+            "             \ "line": line6,
+            "             \ "col":  col6,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid6 = s:display_tri(6, s:tri_sample6, conf6)
 
-            " let line7 = &lines-float2nr(i*line_times)-6
-            " let col7  = &columns-float2nr(i*col_times)-39
-            let line7 = &lines-float2nr((&lines-len(s:tri_sample7))*(pos7[0]+i*(pos7[2]-pos7[0])/(tri_iter-1)))
-            let col7  = &columns-float2nr((&columns-len(s:tri_sample7[0]))*(pos7[1]+i*(pos7[3]-pos7[1])/(tri_iter-1)))
-            let conf7 = {
-                        \ "highlight": 'Triang7',
-                        \ "line": line7,
-                        \ "col":  col7,
-                        \ "pos": "botright",
-                        \ "zindex": 100,
-                        \ }
-            let s:popid7 = s:display_tri(7, s:tri_sample7, conf7)
+            " " let line7 = &lines-float2nr(i*line_times)-6
+            " " let col7  = &columns-float2nr(i*col_times)-39
+            " let line7 = &lines-float2nr((&lines-len(s:tri_sample7))*(pos7[0]+i*(pos7[2]-pos7[0])/(tri_iter-1)))
+            " let col7  = &columns-float2nr((&columns-len(s:tri_sample7[0]))*(pos7[1]+i*(pos7[3]-pos7[1])/(tri_iter-1)))
+            " let conf7 = {
+            "             \ "highlight": 'Triang7',
+            "             \ "line": line7,
+            "             \ "col":  col7,
+            "             \ "pos": "botright",
+            "             \ "zindex": 100,
+            "             \ }
+            " let s:popid7 = s:display_tri(7, s:tri_sample7, conf7)
+            " }}}
+            """ DEBUG END
         endif
 
         if (tri_mode==1) || (tri_mode==2)
             for j in range(10, 79)
+                let tri_sample = untitled#chars#get_tri(j/10."0")
                 let hi_rand = s:local_rand()%3
                 let pop_dict = {
                             \ "highlight": 'Triang1'.hi_rand,
@@ -335,7 +276,7 @@ function! untitled#untitled()
                             \ "col":  float2nr(s:normal(&columns-float2nr(i*col_times)-24, &columns/5)),
                             \ "zindex": 150,
                             \ }
-                execute "let s:popid".j." = s:display_tri(".j.", s:tri_sample".j/10."0, pop_dict)"
+                let s:popid[j] = s:display_tri(j, tri_sample, pop_dict)
             endfor
         endif
 
@@ -344,25 +285,28 @@ function! untitled#untitled()
         """ DEBUG START
         if s:debug
             let pos_info = ""
-            for i in range(100)
-                if exists('line'.i) && exists('col'.i)
-                    execute "let pos_info .= '".i."['.line".i.".'-'.col".i.".'] '"
+            for j in range(100)
+                if has_key(s:popid, j) && exists('pos'.j)
+                    execute "let pos = pos".j
+                    let line = &lines-float2nr((&lines-len(tri_sample))*(pos[0]+i*(pos[2]-pos[0])/(tri_iter-1)))
+                    let col  = &columns-float2nr((&columns-len(tri_sample[0]))*(pos[1]+i*(pos[3]-pos[1])/(tri_iter-1)))
+                    let pos_info .= j."[".line."-".col."] "
                 endif
             endfor
             echo pos_info
             call input('::')
         endif
         """ DEBUG END
-        for i in range(80)
-            if exists('s:popid'.i) && has('popupwin')
-                execute 'call popup_close(s:popid'.i.')'
+        for j in range(80)
+            if has_key(s:popid, j) && has('popupwin')
+                call popup_close(s:popid[j])
             endif
         endfor
     endfor
     for i in range(80)
-        if exists('s:popid'.i) && has('nvim')
-            execute 'call nvim_win_close(s:popid'.i.', v:false)'
-            execute "unlet s:popid".i
+        if has_key(s:popid, i) && has('nvim')
+            call nvim_win_close(s:popid[i], v:false)
+            unlet s:popid[i]
         endif
     endfor
 
