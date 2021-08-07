@@ -2,9 +2,6 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 
-""" DEBUG START
-let s:debug = 0
-""" DEBUG END
 " displayed characters
 let s:tri_Lright =<< EOL
 |\
@@ -257,16 +254,6 @@ let s:tri_sample70 = ['△']
 function! untitled#chars#get_tri(id)
     if exists('s:tri_sample'.a:id)
         execute "let tri_sample = s:tri_sample".a:id
-        """ DEBUG START
-        if s:debug == 1
-            let L = len(tri_sample)
-            for i in range(L)
-                if type(tri_sample[i]) == type([])
-                    let tri_sample[i][0] = substitute(tri_sample[i][0], ".", a:id, '')
-                endif
-            endfor
-        endif
-        """ DEBUG END
     else
         let tri_sample = []
     endif
