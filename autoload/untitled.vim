@@ -14,22 +14,37 @@ let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
             \ ])
 let s:popid = {}
 """ DEBUG START
-let s:debug = 1
+let s:debug = 0
 """ DEBUG END
 
 function! s:set_colors()
     " highlight settings
     highlight Triang0  ctermfg=229 ctermbg=None guifg=Yellow guibg=NONE
-    highlight Triang1  ctermfg=213 ctermbg=None guifg=Pink guibg=NONE
-    highlight Triang2  ctermfg=213 ctermbg=None guifg=Pink guibg=NONE
-    highlight Triang3  ctermfg=51  ctermbg=None guifg=Cyan guibg=NONE
-    highlight Triang4  ctermfg=51  ctermbg=None guifg=Cyan guibg=NONE
-    highlight Triang5  ctermfg=51  ctermbg=None guifg=Cyan guibg=NONE
-    highlight Triang6  ctermfg=213 ctermbg=None guifg=Pink guibg=NONE
+    highlight Triang1  ctermfg=213 ctermbg=None guifg=Pink   guibg=NONE
+    highlight Triang2  ctermfg=213 ctermbg=None guifg=Pink   guibg=NONE
+    highlight Triang3  ctermfg=51  ctermbg=None guifg=Cyan   guibg=NONE
+    highlight Triang4  ctermfg=51  ctermbg=None guifg=Cyan   guibg=NONE
+    highlight Triang5  ctermfg=51  ctermbg=None guifg=Cyan   guibg=NONE
+    highlight Triang6  ctermfg=213 ctermbg=None guifg=Pink   guibg=NONE
     highlight Triang7  ctermfg=229 ctermbg=None guifg=Yellow guibg=NONE
-    highlight Triang10 ctermfg=51  ctermbg=None guifg=Cyan guibg=NONE
-    highlight Triang11 ctermfg=213 ctermbg=None guifg=Pink guibg=NONE
+    highlight Triang10 ctermfg=51  ctermbg=None guifg=Cyan   guibg=NONE
+    highlight Triang11 ctermfg=213 ctermbg=None guifg=Pink   guibg=NONE
     highlight Triang12 ctermfg=229 ctermbg=None guifg=Yellow guibg=NONE
+    """ DEBUG START
+    if s:debug == 1
+        highlight Triang0  ctermbg=8 guibg=Black
+        highlight Triang1  ctermbg=8 guibg=Black
+        highlight Triang2  ctermbg=8 guibg=Black
+        highlight Triang3  ctermbg=8 guibg=Black
+        highlight Triang4  ctermbg=8 guibg=Black
+        highlight Triang5  ctermbg=8 guibg=Black
+        highlight Triang6  ctermbg=8 guibg=Black
+        highlight Triang7  ctermbg=8 guibg=Black
+        highlight Triang10 ctermbg=8 guibg=Black
+        highlight Triang11 ctermbg=8 guibg=Black
+        highlight Triang12 ctermbg=8 guibg=Black
+    endif
+    """ DEBUG END
 endfunction
 
 function! s:local_rand()
@@ -96,18 +111,16 @@ function! s:display_tri(id, tri, config)
                     \ }
         if !exists("s:bufnr".a:id)
             execute "let s:bufnr".a:id." = nvim_create_buf(v:false, v:true)"
-            execute "let bufnr = s:bufnr".a:id
-
-            if type(a:tri) == type([])
-                let tri = a:tri
-            else
-                let tri = [a:tri]
-            endif
-
-            call nvim_buf_set_lines(bufnr, 0, -1, 0, tri)
-        else
-            execute "let bufnr = s:bufnr".a:id
         endif
+        execute "let bufnr = s:bufnr".a:id
+
+        if type(a:tri) == type([])
+            let tri = a:tri
+        else
+            let tri = [a:tri]
+        endif
+
+        call nvim_buf_set_lines(bufnr, 0, -1, 0, tri)
 
         if !has_key(s:popid, a:id)
             let popid = nvim_open_win(bufnr, v:false, config)
@@ -133,18 +146,22 @@ function! untitled#untitled()
 
     " posx = [l_st, c_st, l_end, c_end], relative to bottom right
     " values are 0 <= X <= 1
-    let pos0 = [0.5, 0.15, 1.0, 0.5]
-    let pos1 = [0.1, 0.01, 0.45, 0.38]
+    let pos0 = [0.50, 0.15, 1.00, 0.50]
+    " let pos1 = [0.10, 0.01, 0.45, 0.38]
+    let pos1 = [0.10, 0.01, 0.25, 0.78]
     let pos2 = [0.35, 0.36, 0.68, 0.69]
     let pos3 = [0.25, 0.14, 0.60, 0.47]
-    let pos4 = [0.46, 0.1, 0.81, 0.40]
-    let pos5 = [0.56, 0.43, 0.9, 0.75]
+    " let pos4 = [0.46, 0.10, 0.81, 0.40]
+    let pos4 = [0.46, 0.10, 0.81, 0.30]
+    let pos5 = [0.56, 0.43, 0.90, 0.75]
     let pos6 = [0.52, 0.25, 0.85, 0.58]
-    let pos7 = [0.14, 0.34, 0.5, 0.69]
+    let pos7 = [0.14, 0.34, 0.50, 0.69]
+
     for i in range(tri_iter)
         if (tri_mode==0) || (tri_mode==1)
             for j in range(8)
                 let tri_sample = untitled#chars#get_tri(j)
+                let tri_sample = tri_sample[(i/2)%len(tri_sample)]
                 execute "let pos = pos".j
                 let line = &lines-float2nr((&lines-len(tri_sample))*(pos[0]+i*(pos[2]-pos[0])/(tri_iter-1)))
                 let col  = &columns-float2nr((&columns-len(tri_sample[0]))*(pos[1]+i*(pos[3]-pos[1])/(tri_iter-1)))
@@ -268,7 +285,7 @@ function! untitled#untitled()
 
         if (tri_mode==1) || (tri_mode==2)
             for j in range(10, 79)
-                let tri_sample = untitled#chars#get_tri(j/10."0")
+                let tri_sample = untitled#chars#get_tri(j/10."0")[0]
                 let hi_rand = s:local_rand()%3
                 let pop_dict = {
                             \ "highlight": 'Triang1'.hi_rand,
@@ -281,7 +298,7 @@ function! untitled#untitled()
         endif
 
         redraw!
-        sleep 60ms
+        sleep 100ms
         """ DEBUG START
         if s:debug
             let pos_info = ""
