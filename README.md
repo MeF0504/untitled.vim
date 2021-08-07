@@ -34,7 +34,3 @@ Untitled
 ```
 will lead you to your "sekai"
 
-## Future Plan
-- upgrade the motion
-    - rotate triangles etc...
-
