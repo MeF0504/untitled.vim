@@ -2,7 +2,7 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 " GitHub:       https://github.com/MeF0504/untitled.vim
-" Version:      1.0.0
+" Version:      1.0.1
 
 " initialization
 let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
@@ -10,7 +10,7 @@ let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
             \ 'pjsekai_more_more_jump',
             \ 'pjsekai_vivid_bad_squad',
             \ 'pjsekai_wonderlands_showtime',
-            \ 'pjsekai_25ji_nightcode_de',
+            \ 'pjsekai_nightcord_at_25',
             \ ])
 let s:popid = {}
 
