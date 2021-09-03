@@ -7,7 +7,7 @@ if exists('syntax_on')
     syntax reset
 endif
 
-let g:colors_name = 'pjsekai_25ji_nightcode_de'
+let g:colors_name = 'pjsekai_nightcord_at_25'
 
 " set background=light
 set background=dark

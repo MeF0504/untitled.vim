@@ -41,7 +41,7 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
         let Normal_bg     = has('gui_running') ? '#870000' : '235'
     elseif g:colors_name == 'pjsekai_wonderlands_showtime'
         let Normal_bg     = has('gui_running') ? '#ffffd7' : '230'
-    elseif g:colors_name == 'pjsekai_25ji_nightcode_de'
+    elseif g:colors_name == 'pjsekai_nightcord_at_25'
         let Normal_bg     = has('gui_running') ? '#262626' : '235'
     endif
 
