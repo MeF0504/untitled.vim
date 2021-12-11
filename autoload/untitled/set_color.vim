@@ -33,7 +33,9 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
         let term = 'cterm'
     endif
 
-    if g:colors_name == 'pjsekai_leo_need'
+    if g:colors_name == 'pjsekai_virtual_singers'
+        let Normal_bg     = has('gui_running') ? '#262626' : '235'
+    elseif g:colors_name == 'pjsekai_leo_need'
         let Normal_bg     = has('gui_running') ? '#000087' : '235'
     elseif g:colors_name == 'pjsekai_more_more_jump'
         let Normal_bg     = has('gui_running') ? '#d7ffff' : '195'

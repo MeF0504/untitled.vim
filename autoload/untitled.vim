@@ -6,6 +6,7 @@
 
 " initialization
 let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
+            \ 'pjsekai_virtual_singers',
             \ 'pjsekai_leo_need',
             \ 'pjsekai_more_more_jump',
             \ 'pjsekai_vivid_bad_squad',
