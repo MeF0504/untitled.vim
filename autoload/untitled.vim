@@ -2,10 +2,11 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 " GitHub:       https://github.com/MeF0504/untitled.vim
-" Version:      1.0.1
+" Version:      1.0.2
 
 " initialization
 let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
+            \ 'pjsekai_virtual_singers',
             \ 'pjsekai_leo_need',
             \ 'pjsekai_more_more_jump',
             \ 'pjsekai_vivid_bad_squad',
