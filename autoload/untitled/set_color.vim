@@ -247,8 +247,8 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
                 \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight IncSearch ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg2, s:get_colorid(a:col4, 0), 'NONE',
-                \ Normal_gfg2, s:get_colorid(a:col4, 1), 'NONE',
+                \ Search_cfg, s:get_colorid(a:col5, 0), 'NONE',
+                \ Search_gfg, s:get_colorid(a:col5, 1), 'NONE',
                 \ )
     execute printf("highlight LineNr ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
@@ -299,8 +299,8 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
                 \ s:get_colorid(a:col5, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Search ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Search_cfg, s:get_colorid(a:col5, 0), 'NONE',
-                \ Search_gfg, s:get_colorid(a:col5, 1), 'NONE',
+                \ Search_cfg, s:get_colorid(a:col4, 0), 'NONE',
+                \ Search_gfg, s:get_colorid(a:col4, 1), 'NONE',
                 \ )
     execute printf("highlight SpecialKey ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ s:get_colorid(a:col2, 0), SpecialKey_cbg, 'BOLD',
