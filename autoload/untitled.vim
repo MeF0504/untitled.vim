@@ -2,7 +2,7 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 " GitHub:       https://github.com/MeF0504/untitled.vim
-" Version:      1.0.2
+" Version:      1.2.0
 
 " initialization
 let g:untitled_sekai_color_scheme = get(g:, 'untitled_sekai_color_scheme', [
