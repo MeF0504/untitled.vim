@@ -2,13 +2,13 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 
-function! s:get_colorid(col)
+function! s:get_colorid(col, gui)
     let r = a:col[0]
     let g = a:col[1]
     let b = a:col[2]
     " r, g, b: 0 ~ 255
-    if has('gui_running')
-        return '#' . printf('%02x', r) . printf('%02x', g) . printf('%02x', b)
+    if a:gui
+        return printf('#%02x%02x%02x', r, g, b)
     else
         let r = (r-55.0)/40
         let r = float2nr(r+0.5)
@@ -22,281 +22,318 @@ function! s:get_colorid(col)
         let b = float2nr(b+0.5)
         if b<0 | let b = 0 | endif
 
-        return (36*r)+(6*g)+b + 16
+        return (36*r)+(6*g)+b+16
     endif
 endfunction
 
 function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4, col5)
-    if has('gui_running')
-        let term = 'gui'
-    else
-        let term = 'cterm'
-    endif
-
     if g:colors_name == 'pjsekai_virtual_singers'
-        let Normal_bg     = has('gui_running') ? '#262626' : '235'
+        let Normal_cbg = '235'
+        let Normal_gbg = '#262626'
     elseif g:colors_name == 'pjsekai_leo_need'
-        let Normal_bg     = has('gui_running') ? '#000087' : '235'
+        let Normal_cbg = '235'
+        let Normal_gbg = '#000087'
     elseif g:colors_name == 'pjsekai_more_more_jump'
-        let Normal_bg     = has('gui_running') ? '#d7ffff' : '195'
+        let Normal_cbg = '195'
+        let Normal_gbg = '#d7ffff'
     elseif g:colors_name == 'pjsekai_vivid_bad_squad'
-        let Normal_bg     = has('gui_running') ? '#870000' : '235'
+        let Normal_cbg = '235'
+        let Normal_gbg = '#870000'
     elseif g:colors_name == 'pjsekai_wonderlands_showtime'
-        let Normal_bg     = has('gui_running') ? '#ffffd7' : '230'
+        let Normal_cbg = '230'
+        let Normal_gbg = '#ffffd7'
     elseif g:colors_name == 'pjsekai_nightcord_at_25'
-        let Normal_bg     = has('gui_running') ? '#262626' : '235'
+        let Normal_cbg = '235'
+        let Normal_gbg = '#262626'
     endif
 
     if &background == 'dark'
-        let Normal_fg     = has('gui_running') ? '#e4e4e4' : '254'
-        let Normal_fg2    = has('gui_running') ? '#e4e4e4' : '254'
-        " let Normal_bg     = has('gui_running') ? '#262626' : '235'
-        let Error_bg      = has('gui_running') ? '#d70000' : '160'
-        let Special_fg    = has('gui_running') ? '#af87ff' : '141'
-        let Ignore_fg     = has('gui_running') ? '#9e9e9e' : '247'
-        let ErrorMsg_fg   = has('gui_running') ? '#d70000' : '160'
-        let WarningMsg_fg = has('gui_running') ? '#d7d75f' : '185'
-        let DiffAdd_bg    = has('gui_running') ? '#875fff' : '99'
-        let DiffChange_bg = has('gui_running') ? '#afaf00' : '142'
-        let DiffDelete_bg = has('gui_running') ? '#af0000' : '124'
-        let DiffText_bg   = has('gui_running') ? '#00875f' : '29'
-        let Pmenu_bg      = has('gui_running') ? '#e4e4e4' : '254'
-        let SpecialKey_bg = has('gui_running') ? '#949494' : '246'
-        let SpellBad_bg   = has('gui_running') ? '#af0000' : '124'
-        let SpellCap_bg   = has('gui_running') ? '#af8700' : '136'
-        let SpellLocal_bg = has('gui_running') ? '#00af00' : '34'
-        let SpellRare_bg  = has('gui_running') ? '#8700af' : '91'
-        let FoldColumn_bg = has('gui_running') ? '#000000' : '16'
-        let Search_fg     = has('gui_running') ? '#262626' : '235'
+        let Normal_cfg     = '254'
+        let Normal_gfg     = '#e4e4e4'
+        let Normal_cfg2    = '254'
+        let Normal_gfg2    = '#e4e4e4'
+        " let Normal_cbg     = '235'
+        " let Normal_gbg     = '#262626'
+        let Error_cbg      = '160'
+        let Error_gbg      = '#d70000'
+        let Special_cfg    = '141'
+        let Special_gfg    = '#af87ff'
+        let Ignore_cfg     = '247'
+        let Ignore_gfg     = '#9e9e9e'
+        let ErrorMsg_cfg   = '160'
+        let ErrorMsg_gfg   = '#d70000'
+        let WarningMsg_cfg = '185'
+        let WarningMsg_gfg = '#d7d75f'
+        let DiffAdd_cbg    = '99'
+        let DiffAdd_gbg    = '#875fff'
+        let DiffChange_cbg = '142'
+        let DiffChange_gbg = '#afaf00'
+        let DiffDelete_cbg = '124'
+        let DiffDelete_gbg = '#af0000'
+        let DiffText_cbg   = '29'
+        let DiffText_gbg   = '#00875f'
+        let Pmenu_cbg      = '254'
+        let Pmenu_gbg      = '#e4e4e4'
+        let SpecialKey_cbg = '246'
+        let SpecialKey_gbg = '#949494'
+        let SpellBad_cbg   = '124'
+        let SpellBad_gbg   = '#af0000'
+        let SpellCap_cbg   = '136'
+        let SpellCap_gbg   = '#af8700'
+        let SpellLocal_cbg = '34'
+        let SpellLocal_gbg = '#00af00'
+        let SpellRare_cbg  = '91'
+        let SpellRare_gbg  = '#8700af'
+        let FoldColumn_cbg = '16'
+        let FoldColumn_gbg = '#000000'
+        let Search_cfg     = '235'
+        let Search_gfg     = '#262626'
     else
-        let Normal_fg     = has('gui_running') ? '#626262' : '241'
-        let Normal_fg2    = has('gui_running') ? '#1c1c1c' : '234'
-        " let Normal_bg     = has('gui_running') ? '#eeeeee' : '255'
-        let Error_bg      = has('gui_running') ? '#ff0000' : '196'
-        let Special_fg    = has('gui_running') ? '#af87ff' : '141'
-        let Ignore_fg     = has('gui_running') ? '#9e9e9e' : '247'
-        let ErrorMsg_fg   = has('gui_running') ? '#d70000' : '160'
-        let WarningMsg_fg = has('gui_running') ? '#af8700' : '136'
-        let DiffAdd_bg    = has('gui_running') ? '#d7afff' : '183'
-        let DiffChange_bg = has('gui_running') ? '#d7ff5f' : '191'
-        let DiffDelete_bg = has('gui_running') ? '#d7005f' : '161'
-        let DiffText_bg   = has('gui_running') ? '#afff87' : '156'
-        let Pmenu_bg      = has('gui_running') ? '#808080' : '244'
-        let SpecialKey_bg = has('gui_running') ? '#949494' : '246'
-        let SpellBad_bg   = has('gui_running') ? '#af0000' : '124'
-        let SpellCap_bg   = has('gui_running') ? '#d7d75f' : '185'
-        let SpellLocal_bg = has('gui_running') ? '#afd75f' : '149'
-        let SpellRare_bg  = has('gui_running') ? '#d75fff' : '171'
-        let FoldColumn_bg = has('gui_running') ? '#000000' : '16'
-        let Search_fg     = has('gui_running') ? '#eeeeee' : '255'
+        let Normal_cfg     = '241'
+        let Normal_gfg     = '#626262'
+        let Normal_cfg2    = '234'
+        let Normal_gfg2    = '#1c1c1c'
+        " let Normal_cbg     = '255'
+        " let Normal_gbg     = '#eeeeee'
+        let Error_cbg      = '196'
+        let Error_gbg      = '#ff0000'
+        let Special_cfg    = '141'
+        let Special_gfg    = '#af87ff'
+        let Ignore_cfg     = '247'
+        let Ignore_gfg     = '#9e9e9e'
+        let ErrorMsg_cfg   = '160'
+        let ErrorMsg_gfg   = '#d70000'
+        let WarningMsg_cfg = '136'
+        let WarningMsg_gfg = '#af8700'
+        let DiffAdd_cbg    = '183'
+        let DiffAdd_gbg    = '#d7afff'
+        let DiffChange_cbg = '191'
+        let DiffChange_gbg = '#d7ff5f'
+        let DiffDelete_cbg = '161'
+        let DiffDelete_gbg = '#d7005f'
+        let DiffText_cbg   = '156'
+        let DiffText_gbg   = '#afff87'
+        let Pmenu_cbg      = '244'
+        let Pmenu_gbg      = '#808080'
+        let SpecialKey_cbg = '246'
+        let SpecialKey_gbg = '#949494'
+        let SpellBad_cbg   = '124'
+        let SpellBad_gbg   = '#af0000'
+        let SpellCap_cbg   = '185'
+        let SpellCap_gbg   = '#d7d75f'
+        let SpellLocal_cbg = '149'
+        let SpellLocal_gbg = '#afd75f'
+        let SpellRare_cbg  = '171'
+        let SpellRare_gbg  = '#d75fff'
+        let FoldColumn_cbg = '16'
+        let FoldColumn_gbg = '#000000'
+        let Search_cfg     = '255'
+        let Search_gfg     = '#eeeeee'
     endif
 
     " :h group-name
-    execute "highlight Comment"
-                \ ." ".term."fg=".s:get_colorid(a:col1)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Constant"
-                \ ." ".term."fg=".s:get_colorid(a:col3)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight String"
-                \ ." ".term."fg=".s:get_colorid(a:col5)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Character"
-                \ ." ".term."fg=".s:get_colorid(a:col5)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Identifier"
-                \ ." ".term."fg=".s:get_colorid(a:col2)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Statement"
-                \ ." ".term."fg=".s:get_colorid(a:col3)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight PreProc"
-                \ ." ".term."fg=".s:get_colorid(a:col0)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=BOLD"
-    execute "highlight Type"
-                \ ." ".term."fg=".s:get_colorid(a:col4)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Special"
-                \ ." ".term."fg=".s:get_colorid(a:col4)
-                " \ ." ".term."fg=".s:get_colorid(Special_fg)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Underlined"
-                \ ." ".term."fg=".s:get_colorid(a:col0)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=UNDERLINE"
-    execute "highlight Ignore"
-                \ ." ".term."fg=".Ignore_fg
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Error"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".Error_bg
-                \ ." ".term."=BOLD"
-    execute "highlight Todo"
-                \ ." ".term."fg=".s:get_colorid(a:col1)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=BOLD,UNDERLINE"
+    execute printf("highlight Comment ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \)
+    execute printf("highlight Constant ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col3, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col3, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight String ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col5, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col5, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Character ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col5, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col5, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Identifier ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col2, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col2, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Statement ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col3, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col3, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight PreProc ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col0, 0), 'NONE', 'BOLD',
+                \ s:get_colorid(a:col0, 1), 'NONE', 'BOLD',
+                \ )
+    execute printf("highlight Type ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col4, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col4, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Special ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col4, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col4, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Underlined ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col0, 0), 'NONE', 'UNDERLINE',
+                \ s:get_colorid(a:col0, 1), 'NONE', 'UNDERLINE',
+                \ )
+    execute printf("highlight Ignore ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Ignore_cfg, 'NONE', 'NONE',
+                \ Ignore_gfg, 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Error ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, Error_cbg, 'BOLD',
+                \ Normal_gfg2, Error_gbg, 'BOLD',
+                \ )
+    execute printf("highlight Todo ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col1, 0), 'NONE', 'BOLD,UNDERLINE',
+                \ s:get_colorid(a:col1, 1), 'NONE', 'BOLD,UNDERLINE',
+                \ )
 
     " :h highlight-groups
-    execute "highlight ColorColumn"
-                \ ." ".term."fg=NONE"
-                \ ." ".term."bg=".s:get_colorid(a:col1)
-                \ ." ".term."=NONE"
-    execute "highlight Conceal"
-                \ ." ".term."fg=".s:get_colorid(a:col1)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Cursor"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:group_color)
-                \ ." ".term."=NONE"
-    execute "highlight CursorColumn"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".s:get_colorid(a:group_color)
-                \ ." ".term."=NONE"
-    " execute "highlight CursorLine"
-    "             \ ." ".term."bg=".s:get_colorid(a:group_color)
-    execute "highlight Directory"
-                \ ." ".term."fg=".s:get_colorid(a:col4)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight DiffAdd"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".DiffAdd_bg
-                \ ." ".term."=NONE"
-    execute "highlight DiffChange"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".DiffChange_bg
-                \ ." ".term."=NONE"
-    execute "highlight DiffDelete"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".DiffDelete_bg
-                \ ." ".term."=NONE"
-    execute "highlight DiffText"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".DiffText_bg
-                \ ." ".term."=NONE"
-    execute "highlight EndOfBuffer"
-                \ ." ".term."fg=".s:get_colorid(a:group_color)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight ErrorMsg"
-                \ ." ".term."fg=".ErrorMsg_fg
-                \ ." ".term."bg=".Normal_bg
-                \ ." ".term."=NONE"
-    execute "highlight VertSplit"
-                \ ." ".term."fg=".s:get_colorid(a:group_color)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Folded"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:group_color)
-                \ ." ".term."=NONE"
-    execute "highlight FoldColumn"
-                \ ." ".term."fg=".s:get_colorid(a:col0)
-                \ ." ".term."bg=".FoldColumn_bg
-                \ ." ".term."=NONE"
-    execute "highlight SignColumn"
-                \ ." ".term."fg=".s:get_colorid(a:col1)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight IncSearch"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".s:get_colorid(a:col4)
-                \ ." ".term."=NONE"
-    execute "highlight LineNr"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:group_color)
-                \ ." ".term."=NONE"
-    execute "highlight CursorLineNr"
-                \ ." ".term."fg=".s:get_colorid(a:col2)
-                \ ." ".term."bg=".s:get_colorid(a:group_color)
-                \ ." ".term."=NONE"
-    execute "highlight MatchParen"
-                \ ." ".term."fg=".s:get_colorid(a:col2)
-                \ ." ".term."bg=".s:get_colorid(a:col1)
-                \ ." ".term."=NONE"
-    execute "highlight ModeMsg"
-                \ ." ".term."fg=".s:get_colorid(a:col0)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=BOLD"
-    execute "highlight MoreMsg"
-                \ ." ".term."fg=".s:get_colorid(a:col0)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=BOLD"
-    execute "highlight NonText"
-                \ ." ".term."fg=".s:get_colorid(a:col1)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Normal"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".Normal_bg
-                \ ." ".term."=NONE"
-    execute "highlight Pmenu"
-                \ ." ".term."fg=".s:get_colorid(a:group_color)
-                \ ." ".term."bg=".Pmenu_bg
-                \ ." ".term."=NONE"
-    execute "highlight PmenuSel"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:group_color)
-                \ ." ".term."=NONE"
-    execute "highlight PmenuSbar"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:col0)
-                \ ." ".term."=NONE"
-    execute "highlight PmenuThumb"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:col2)
-                \ ." ".term."=NONE"
-    execute "highlight Question"
-                \ ." ".term."fg=".s:get_colorid(a:col5)
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
-    execute "highlight Search"
-                \ ." ".term."fg=".Search_fg
-                \ ." ".term."bg=".s:get_colorid(a:col5)
-                \ ." ".term."=NONE"
-    execute "highlight SpecialKey"
-                \ ." ".term."fg=".s:get_colorid(a:col2)
-                \ ." ".term."bg=".SpecialKey_bg
-                \ ." ".term."=BOLD"
-    execute "highlight SpellBad"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".SpellBad_bg
-                \ ." ".term."=NONE"
-    execute "highlight SpellCap"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".SpellCap_bg
-                \ ." ".term."=NONE"
-    execute "highlight SpellLocal"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".SpellLocal_bg
-                \ ." ".term."=NONE"
-    execute "highlight SpellRare"
-                \ ." ".term."fg=".Normal_fg2
-                \ ." ".term."bg=".SpellRare_bg
-                \ ." ".term."=NONE"
-    execute "highlight Title"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:group_color)
-                \ ." ".term."=BOLD"
-    execute "highlight Visual"
-                \ ." ".term."fg=".Normal_fg
-                \ ." ".term."bg=".s:get_colorid(a:col2)
-                \ ." ".term."=NONE"
-    execute "highlight WarningMsg"
-                \ ." ".term."fg=".WarningMsg_fg
-                \ ." ".term."bg=NONE"
-                \ ." ".term."=NONE"
+    execute printf("highlight ColorColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ 'NONE', s:get_colorid(a:col1, 0), 'NONE',
+                \ 'NONE', s:get_colorid(a:col1, 1), 'NONE',
+                \ )
+    execute printf("highlight Conceal ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Cursor ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ )
+    execute printf("highlight CursorColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, s:get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg2, s:get_colorid(a:group_color, 1), 'NONE',
+                \ )
+    execute printf("highlight Directory ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col4, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col4, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight DiffAdd ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, DiffAdd_cbg, 'NONE',
+                \ Normal_gfg2, DiffAdd_gbg, 'NONE',
+                \ )
+    execute printf("highlight DiffChange ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, DiffChange_cbg, 'NONE',
+                \ Normal_gfg2, DiffChange_gbg, 'NONE',
+                \ )
+    execute printf("highlight DiffDelete ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, DiffDelete_cbg, 'NONE',
+                \ Normal_gfg2, DiffDelete_gbg, 'NONE',
+                \ )
+    execute printf("highlight DiffText ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, DiffText_cbg, 'NONE',
+                \ Normal_gfg2, DiffText_gbg, 'NONE',
+                \ )
+    execute printf("highlight EndOfBuffer ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:group_color, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:group_color, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight ErrorMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ ErrorMsg_cfg, Normal_cbg, 'NONE',
+                \ ErrorMsg_gfg, Normal_gbg, 'NONE',
+                \ )
+    execute printf("highlight VertSplit ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:group_color, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:group_color, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Folded ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ )
+    execute printf("highlight FoldColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col0, 0), FoldColumn_cbg, 'NONE',
+                \ s:get_colorid(a:col0, 1), FoldColumn_gbg, 'NONE',
+                \ )
+    execute printf("highlight SignColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight IncSearch ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, s:get_colorid(a:col4, 0), 'NONE',
+                \ Normal_gfg2, s:get_colorid(a:col4, 1), 'NONE',
+                \ )
+    execute printf("highlight LineNr ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ )
+    execute printf("highlight CursorLineNr ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col2, 0), s:get_colorid(a:group_color, 0), 'NONE',
+                \ s:get_colorid(a:col2, 1), s:get_colorid(a:group_color, 1), 'NONE',
+                \ )
+    execute printf("highlight MatchParen ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col2, 0), s:get_colorid(a:col1, 0), 'NONE',
+                \ s:get_colorid(a:col2, 1), s:get_colorid(a:col1, 1), 'NONE',
+                \ )
+    execute printf("highlight ModeMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col0, 0), 'NONE', 'BOLD',
+                \ s:get_colorid(a:col0, 1), 'NONE', 'BOLD',
+                \ )
+    execute printf("highlight MoreMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col0, 0), 'NONE', 'BOLD',
+                \ s:get_colorid(a:col0, 1), 'NONE', 'BOLD',
+                \ )
+    execute printf("highlight NonText ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Normal ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, Normal_cbg, 'NONE',
+                \ Normal_gfg, Normal_gbg, 'NONE',
+                \ )
+    execute printf("highlight Pmenu ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:group_color, 0), Pmenu_cbg, 'NONE',
+                \ s:get_colorid(a:group_color, 1), Pmenu_gbg, 'NONE',
+                \ )
+    execute printf("highlight PmenuSel ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ )
+    execute printf("highlight PmenuSbar ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:col0, 0), 'NONE',
+                \ Normal_gfg, s:get_colorid(a:col0, 1), 'NONE',
+                \ )
+    execute printf("highlight PmenuThumb ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:col2, 0), 'NONE',
+                \ Normal_gfg, s:get_colorid(a:col2, 1), 'NONE',
+                \ )
+    execute printf("highlight Question ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col5, 0), 'NONE', 'NONE',
+                \ s:get_colorid(a:col5, 1), 'NONE', 'NONE',
+                \ )
+    execute printf("highlight Search ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Search_cfg, s:get_colorid(a:col5, 0), 'NONE',
+                \ Search_gfg, s:get_colorid(a:col5, 1), 'NONE',
+                \ )
+    execute printf("highlight SpecialKey ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ s:get_colorid(a:col2, 0), SpecialKey_cbg, 'BOLD',
+                \ s:get_colorid(a:col2, 1), SpecialKey_gbg, 'BOLD',
+                \ )
+    execute printf("highlight SpellBad ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, SpellBad_cbg, 'NONE',
+                \ Normal_gfg2, SpellBad_gbg, 'NONE',
+                \ )
+    execute printf("highlight SpellCap ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, SpellCap_cbg, 'NONE',
+                \ Normal_gfg2, SpellCap_gbg, 'NONE',
+                \ )
+    execute printf("highlight SpellLocal ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, SpellLocal_cbg, 'NONE',
+                \ Normal_gfg2, SpellLocal_gbg, 'NONE',
+                \ )
+    execute printf("highlight SpellRare ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg2, SpellRare_cbg, 'NONE',
+                \ Normal_gfg2, SpellRare_gbg, 'NONE',
+                \ )
+    execute printf("highlight Title ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'BOLD',
+                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'BOLD',
+                \ )
+    execute printf("highlight Visual ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ Normal_cfg, s:get_colorid(a:col2, 0), 'NONE',
+                \ Normal_gfg, s:get_colorid(a:col2, 1), 'NONE',
+                \ )
+    execute printf("highlight WarningMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
+                \ WarningMsg_cfg, 'NONE', 'NONE',
+                \ WarningMsg_gfg, 'NONE', 'NONE',
+                \ )
 
 endfunction
 
