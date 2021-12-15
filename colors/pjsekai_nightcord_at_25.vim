@@ -21,6 +21,5 @@ let s:mizuki      = [0xcb, 0x91, 0xb9]
 
 " source <sfile>:h:h/autoload/untitled/set_color.vim
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:miku, s:kanade, s:mafuyu, s:ena, s:mizuki)
-
+call untitled#set_color#set_color(s:group_color, s:miku, s:miku, s:kanade, s:mafuyu, s:ena, s:mizuki, ['235', '#262626'])
 

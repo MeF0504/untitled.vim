@@ -22,6 +22,5 @@ let s:shizuku     = [0x67, 0xac, 0x9c]
 
 " source <sfile>:h:h/autoload/untitled/set_color.vim
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:rin, s:minori, s:haruka, s:airi, s:shizuku)
-
+call untitled#set_color#set_color(s:group_color, s:miku, s:rin, s:minori, s:haruka, s:airi, s:shizuku, ['195', '#d7ffff'])
 
