@@ -53,8 +53,8 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
         let DiffDelete_gbg = '#af0000'
         let DiffText_cbg   = '29'
         let DiffText_gbg   = '#00875f'
-        let Pmenu_cbg      = '254'
-        let Pmenu_gbg      = '#e4e4e4'
+        let Pmenu_cbg      = '240'
+        let Pmenu_gbg      = '#585858'
         let SpecialKey_cbg = '246'
         let SpecialKey_gbg = '#949494'
         let SpellBad_cbg   = '124'
@@ -94,8 +94,8 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
         let DiffDelete_gbg = '#d7005f'
         let DiffText_cbg   = '156'
         let DiffText_gbg   = '#afff87'
-        let Pmenu_cbg      = '244'
-        let Pmenu_gbg      = '#808080'
+        let Pmenu_cbg      = '253'
+        let Pmenu_gbg      = '#dadada'
         let SpecialKey_cbg = '246'
         let SpecialKey_gbg = '#949494'
         let SpellBad_cbg   = '124'
@@ -260,8 +260,8 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
                 \ Normal_gfg, Normal_gbg, 'NONE',
                 \ )
     execute printf("highlight Pmenu ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:group_color, 0), Pmenu_cbg, 'NONE',
-                \ s:get_colorid(a:group_color, 1), Pmenu_gbg, 'NONE',
+                \ Normal_cfg, Pmenu_cbg, 'NONE',
+                \ Normal_gfg, Pmenu_gbg, 'NONE',
                 \ )
     execute printf("highlight PmenuSel ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
