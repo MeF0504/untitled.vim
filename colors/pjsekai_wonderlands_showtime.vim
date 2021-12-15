@@ -22,7 +22,6 @@ let s:rui         = [0xac, 0x6e, 0xe8]
 
 " source <sfile>:h:h/autoload/untitled/set_color.vim
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:kaito, s:tsukasa, s:emu, s:nene, s:rui)
-
+call untitled#set_color#set_color(s:group_color, s:miku, s:kaito, s:tsukasa, s:emu, s:nene, s:rui, ['230', '#ffffd7'])
 
 

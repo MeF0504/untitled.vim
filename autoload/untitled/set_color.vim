@@ -26,27 +26,8 @@ function! s:get_colorid(col, gui)
     endif
 endfunction
 
-function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4, col5)
-    if g:colors_name == 'pjsekai_virtual_singers'
-        let Normal_cbg = '235'
-        let Normal_gbg = '#262626'
-    elseif g:colors_name == 'pjsekai_leo_need'
-        let Normal_cbg = '235'
-        let Normal_gbg = '#10003b'
-    elseif g:colors_name == 'pjsekai_more_more_jump'
-        let Normal_cbg = '195'
-        let Normal_gbg = '#d7ffff'
-    elseif g:colors_name == 'pjsekai_vivid_bad_squad'
-        let Normal_cbg = '235'
-        let Normal_gbg = '#301f1a'
-    elseif g:colors_name == 'pjsekai_wonderlands_showtime'
-        let Normal_cbg = '230'
-        let Normal_gbg = '#ffffd7'
-    elseif g:colors_name == 'pjsekai_nightcord_at_25'
-        let Normal_cbg = '235'
-        let Normal_gbg = '#262626'
-    endif
-
+function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4, col5, Normal_bg)
+    let [Normal_cbg, Normal_gbg] = a:Normal_bg
     if &background == 'dark'
         let Normal_cfg     = '254'
         let Normal_gfg     = '#e4e4e4'

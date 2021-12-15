@@ -22,5 +22,4 @@ let s:kaito       = [0x27, 0x4e, 0xc2]
 
 " source <sfile>:h:h/autoload/untitled/set_color.vim
 
-call untitled#set_color#set_color(s:group_color, s:meiko, s:kaito, s:miku, s:rin, s:ren, s:ruka)
-
+call untitled#set_color#set_color(s:group_color, s:meiko, s:kaito, s:miku, s:rin, s:ren, s:ruka, ['235', '#262626'])

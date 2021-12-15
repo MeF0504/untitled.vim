@@ -22,5 +22,4 @@ let s:shiho       = [0xaa, 0xd6, 0x1b]
 
 " source <sfile>:h:h/autoload/untitled/set_color.vim
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:ruka, s:ichika, s:saki, s:honami, s:shiho)
-
+call untitled#set_color#set_color(s:group_color, s:miku, s:ruka, s:ichika, s:saki, s:honami, s:shiho, ['235', '#10003b'])

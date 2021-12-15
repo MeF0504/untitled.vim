@@ -22,6 +22,5 @@ let s:toya        = [0x0e, 0x5f, 0xd4]
 
 " source <sfile>:h:h/autoload/untitled/set_color.vim
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:meiko, s:kohane, s:ann, s:akito, s:toya)
-
+call untitled#set_color#set_color(s:group_color, s:miku, s:meiko, s:kohane, s:ann, s:akito, s:toya, ['235', '#301f1a'])
 
