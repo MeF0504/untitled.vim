@@ -1,0 +1,74 @@
+*untitled.txt* Project SEKAI inspired unofficial vim plugin.
+
+==============================================================================
+CONTENTS                                                     *untitled-contents*
+
+Introduction	|untitled-introduction|
+Commands	|untitled-commands|
+Options		|untitled-options|
+Color-schemes	|untitled-colorschemes|
+License		|untitled-license|
+
+==============================================================================
+INTRODUCTION                                             *untitled-introduction*
+
+Project SEKAI-inspired unofficial vim plugin.
+
+Project SEKAI official website;
+(JP): https://pjsekai.sega.jp/
+(EN): https://www.colorfulstage.com/
+
+We are able to go to our SEKAI by typing |:Untitled| in vim.
+
+Note: this plugin works on both xterm-256color (|highlight-cterm|) and 24-bit
+full color (|highlight-gui|), but I recommend using 24-bit full color.
+
+==============================================================================
+COMMANDS                                                     *untitled-commands*
+
+:Untitled                                                            *:Untitled*
+
+Lead your vim to SEKAI.
+==============================================================================
+OPTIONS                                                       *untitled-options*
+
+g:untitled_sekai_color_scheme                    *g:untitled_sekai_color_scheme*
+	type: |list| of strings
+	default: >
+		["pjsekai_virtual_singers",
+		 "pjsekai_leo_need",
+		 "pjsekai_more_more_jump",
+		 "pjsekai_vivid_bad_squad",
+		 "pjsekai_wonderlands_showtime",
+		 "pjsekai_nightcord_at_25"]
+<
+
+Set the color schemes that are randomly selected after the effect. This means
+you can specify the group to be applied the color scheme, or use this plugin
+as a randomly-color-scheme-selecting plugin.
+
+==============================================================================
+COLOR-SCHEMES                                            *untitled-colorschemes*
+
+The SEKAI is expressed by a color scheme comprising character colors in this
+plugin. Currently, this plugin contains 6 color schemes;
+	* pjsekai_virtual_singers
+		Miku, Rin, Len, Luka, MEIKO, KAITO
+	* pjsekai_leo_need
+		Miku, Luka, Ichika, Saki, Honami, Shiho
+	* pjsekai_more_more_jump
+		Miku, Rin, Minori, Haruka, Airi, Shizuku
+	* pjsekai_vivid_bad_squad
+		Miku, MEIKO, Kohane, An, Akito, Toya
+	* pjsekai_wonderlands_showtime
+		Miku, KAITO, Tsukasa, emu, Nene, Rui
+	* pjsekai_nightcord_at_25
+		Miku, Kanade, Mafuyu, Ena, Mizuki
+
+==============================================================================
+LICENSE                                                       *untitled-license*
+
+The MIT License (https://github.com/MeF0504/untitled.vim/blob/main/LICENSE)
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:
