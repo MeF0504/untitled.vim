@@ -12,14 +12,12 @@ let g:colors_name = 'pjsekai_virtual_singers'
 " set background=light
 set background=dark
 
-let s:group_color = [0x9a, 0x9a, 0x9a]
-let s:miku        = [0x23, 0xc3, 0xac]
-let s:rin         = [0xfd, 0xc3, 0x13]
-let s:len         = [0xfe, 0xed, 0x13]
-let s:ruka        = [0xfd, 0xd6, 0xec]
-let s:meiko       = [0xd3, 0x2d, 0x34]
-let s:kaito       = [0x27, 0x4e, 0xc2]
-
-" source <sfile>:h:h/autoload/untitled/set_color.vim
+let s:group_color = untitled#vs#group_color
+let s:miku        = untitled#vs#miku
+let s:rin         = untitled#vs#rin
+let s:len         = untitled#vs#len
+let s:ruka        = untitled#vs#ruka
+let s:meiko       = untitled#vs#meiko
+let s:kaito       = untitled#vs#kaito
 
 call untitled#set_color#set_color(s:group_color, s:meiko, s:kaito, s:miku, s:rin, s:len, s:ruka, ['235', '#262626'])
