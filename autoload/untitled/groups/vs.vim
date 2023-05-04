@@ -1,0 +1,10 @@
+scriptencoding utf-8
+
+let untitled#groups#vs#group_color = [0x9a, 0x9a, 0x9a]
+let untitled#groups#vs#miku        = [0x23, 0xc3, 0xac]
+let untitled#groups#vs#rin         = [0xfd, 0xc3, 0x13]
+let untitled#groups#vs#len         = [0xfe, 0xed, 0x13]
+let untitled#groups#vs#ruka        = [0xfd, 0xd6, 0xec]
+let untitled#groups#vs#meiko       = [0xd3, 0x2d, 0x34]
+let untitled#groups#vs#kaito       = [0x27, 0x4e, 0xc2]
+

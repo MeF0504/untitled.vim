@@ -1,0 +1,10 @@
+scriptencoding utf-8
+
+let untitled#groups#ln#group_color = [0x33, 0x3b, 0xd5]
+let untitled#groups#ln#miku        = [0x4e, 0x87, 0x79]
+let untitled#groups#ln#ruka        = [0xfd, 0xd6, 0xec]
+let untitled#groups#ln#ichika      = [0x2b, 0x98, 0xe9]
+let untitled#groups#ln#saki        = [0xfd, 0xd7, 0x37]
+let untitled#groups#ln#honami      = [0xe8, 0x4d, 0x53]
+let untitled#groups#ln#shiho       = [0xaa, 0xd6, 0x1b]
+
