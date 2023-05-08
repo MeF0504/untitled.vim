@@ -20,5 +20,5 @@ let s:haruka      = untitled#groups#mmj#haruka
 let s:airi        = untitled#groups#mmj#airi
 let s:shizuku     = untitled#groups#mmj#shizuku
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:rin, s:minori, s:haruka, s:airi, s:shizuku, ['195', '#d7ffff'])
+call untitled#color#set_color(s:group_color, s:miku, s:rin, s:minori, s:haruka, s:airi, s:shizuku, ['195', '#d7ffff'])
 

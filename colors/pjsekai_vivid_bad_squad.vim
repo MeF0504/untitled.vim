@@ -20,5 +20,5 @@ let s:an          = untitled#groups#vbs#an
 let s:akito       = untitled#groups#vbs#akito
 let s:toya        = untitled#groups#vbs#toya
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:meiko, s:kohane, s:an, s:akito, s:toya, ['235', '#301f1a'])
+call untitled#color#set_color(s:group_color, s:miku, s:meiko, s:kohane, s:an, s:akito, s:toya, ['235', '#301f1a'])
 

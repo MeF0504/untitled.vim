@@ -20,4 +20,4 @@ let s:ruka        = untitled#groups#vs#ruka
 let s:meiko       = untitled#groups#vs#meiko
 let s:kaito       = untitled#groups#vs#kaito
 
-call untitled#set_color#set_color(s:group_color, s:meiko, s:kaito, s:miku, s:rin, s:len, s:ruka, ['235', '#262626'])
+call untitled#color#set_color(s:group_color, s:meiko, s:kaito, s:miku, s:rin, s:len, s:ruka, ['235', '#262626'])

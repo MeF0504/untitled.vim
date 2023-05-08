@@ -20,6 +20,6 @@ let s:emu         = untitled#wxs#emu
 let s:nene        = untitled#wxs#nene
 let s:rui         = untitled#wxs#rui
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:kaito, s:tsukasa, s:emu, s:nene, s:rui, ['230', '#ffffd7'])
+call untitled#color#set_color(s:group_color, s:miku, s:kaito, s:tsukasa, s:emu, s:nene, s:rui, ['230', '#ffffd7'])
 
 

@@ -20,4 +20,4 @@ let s:saki        = untitled#groups#ln#saki
 let s:honami      = untitled#groups#ln#honami
 let s:shiho       = untitled#groups#ln#shiho
 
-call untitled#set_color#set_color(s:group_color, s:miku, s:ruka, s:ichika, s:saki, s:honami, s:shiho, ['235', '#10003b'])
+call untitled#color#set_color(s:group_color, s:miku, s:ruka, s:ichika, s:saki, s:honami, s:shiho, ['235', '#10003b'])
