@@ -1,9 +1,9 @@
 scriptencoding utf-8
 
-let untitled#groups#25#group_color = [0x74, 0x2e, 0x87]
-let untitled#groups#25#miku        = [0xdc, 0xd4, 0xd6]
-let untitled#groups#25#kanade      = [0xac, 0x4e, 0x75]
-let untitled#groups#25#mafuyu      = [0x74, 0x73, 0xc0]
-let untitled#groups#25#ena         = [0xc1, 0x99, 0x74]
-let untitled#groups#25#mizuki      = [0xcb, 0x91, 0xb9]
+let untitled#groups#25#group_color = {'color': [0x74, 0x2e, 0x87]}
+let untitled#groups#25#miku        = {'color': [0xdc, 0xd4, 0xd6]}
+let untitled#groups#25#kanade      = {'color': [0xac, 0x4e, 0x75], 'birthday': '02/10'}
+let untitled#groups#25#mafuyu      = {'color': [0x74, 0x73, 0xc0], 'birthday': '01/27'}
+let untitled#groups#25#ena         = {'color': [0xc1, 0x99, 0x74], 'birthday': '04/30'}
+let untitled#groups#25#mizuki      = {'color': [0xcb, 0x91, 0xb9], 'birthday': '08/27'}
 

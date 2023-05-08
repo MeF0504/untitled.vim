@@ -1,10 +1,10 @@
 scriptencoding utf-8
 
-let untitled#groups#ln#group_color = [0x33, 0x3b, 0xd5]
-let untitled#groups#ln#miku        = [0x4e, 0x87, 0x79]
-let untitled#groups#ln#ruka        = [0xfd, 0xd6, 0xec]
-let untitled#groups#ln#ichika      = [0x2b, 0x98, 0xe9]
-let untitled#groups#ln#saki        = [0xfd, 0xd7, 0x37]
-let untitled#groups#ln#honami      = [0xe8, 0x4d, 0x53]
-let untitled#groups#ln#shiho       = [0xaa, 0xd6, 0x1b]
+let untitled#groups#ln#group_color = {'color': [0x33, 0x3b, 0xd5]}
+let untitled#groups#ln#miku        = {'color': [0x4e, 0x87, 0x79]}
+let untitled#groups#ln#ruka        = {'color': [0xfd, 0xd6, 0xec]}
+let untitled#groups#ln#ichika      = {'color': [0x2b, 0x98, 0xe9], 'birthday': '08/11'}
+let untitled#groups#ln#saki        = {'color': [0xfd, 0xd7, 0x37], 'birthday': '05/09'}
+let untitled#groups#ln#honami      = {'color': [0xe8, 0x4d, 0x53], 'birthday': '10/27'}
+let untitled#groups#ln#shiho       = {'color': [0xaa, 0xd6, 0x1b], 'birthday': '01/08'}
 

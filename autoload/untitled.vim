@@ -192,3 +192,53 @@ function! untitled#untitled()
     execute 'silent colorscheme '.g:untitled_sekai_color_scheme[col_rand]
 
 endfunction
+
+function! untitled#get_birthday_color() abort
+    if !exists('*strftime')
+        return {}
+    endif
+    let today = strftime('%m/%d')
+    let birthdays = {}
+    for member in [
+                \ g:untitled#groups#vs#miku,
+                \ g:untitled#groups#vs#rin,
+                \ g:untitled#groups#vs#len,
+                \ g:untitled#groups#vs#ruka,
+                \ g:untitled#groups#vs#meiko,
+                \ g:untitled#groups#vs#kaito,
+                \ g:untitled#groups#ln#ichika,
+                \ g:untitled#groups#ln#saki,
+                \ g:untitled#groups#ln#honami,
+                \ g:untitled#groups#ln#shiho,
+                \ g:untitled#groups#mmj#minori,
+                \ g:untitled#groups#mmj#haruka,
+                \ g:untitled#groups#mmj#airi,
+                \ g:untitled#groups#mmj#shizuku,
+                \ g:untitled#groups#vbs#kohane,
+                \ g:untitled#groups#vbs#an,
+                \ g:untitled#groups#vbs#akito,
+                \ g:untitled#groups#vbs#toya,
+                \ g:untitled#groups#wxs#tsukasa,
+                \ g:untitled#groups#wxs#emu,
+                \ g:untitled#groups#wxs#nene,
+                \ g:untitled#groups#wxs#rui,
+                \ g:untitled#groups#25#kanade,
+                \ g:untitled#groups#25#mafuyu,
+                \ g:untitled#groups#25#ena,
+                \ g:untitled#groups#25#mizuki,
+                \ ]
+        if has_key(member, 'birthday')
+            let birthdays[member.birthday] = member.color
+        endif
+    endfor
+    for bd in keys(birthdays)
+        if bd ==# today
+            let col = birthdays[today]
+            let gcol = untitled#color#get_colorid(col, 1)
+            let ccol = untitled#color#get_colorid(col, 0)
+            return {'gui': gcol, 'cterm': ccol}
+        endif
+    endfor
+    return {}
+endfunction
+

@@ -2,7 +2,7 @@
 " Description:  Project-sekai inspired vim plugin
 " Author:       MeF
 
-function! s:get_colorid(col, gui)
+function! untitled#color#get_colorid(col, gui)
     let r = a:col[0]
     let g = a:col[1]
     let b = a:col[2]
@@ -26,7 +26,7 @@ function! s:get_colorid(col, gui)
     endif
 endfunction
 
-function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4, col5, Normal_bg)
+function! untitled#color#set_color(group_color, col0, col1, col2, col3, col4, col5, Normal_bg)
     let [Normal_cbg, Normal_gbg] = a:Normal_bg
     if &background == 'dark'
         let Normal_cfg     = '254'
@@ -114,44 +114,44 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
 
     " :h group-name
     execute printf("highlight Comment ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 1), 'NONE', 'NONE',
                 \)
     execute printf("highlight Constant ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col3, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col3, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col3, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col3, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight String ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col5, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col5, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col5, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col5, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Character ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col5, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col5, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col5, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col5, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Identifier ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col2, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col2, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col2, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col2, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Statement ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col3, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col3, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col3, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col3, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight PreProc ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col0, 0), 'NONE', 'BOLD',
-                \ s:get_colorid(a:col0, 1), 'NONE', 'BOLD',
+                \ untitled#color#get_colorid(a:col0, 0), 'NONE', 'BOLD',
+                \ untitled#color#get_colorid(a:col0, 1), 'NONE', 'BOLD',
                 \ )
     execute printf("highlight Type ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col4, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col4, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col4, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col4, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Special ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col4, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col4, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col4, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col4, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Underlined ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col0, 0), 'NONE', 'UNDERLINE',
-                \ s:get_colorid(a:col0, 1), 'NONE', 'UNDERLINE',
+                \ untitled#color#get_colorid(a:col0, 0), 'NONE', 'UNDERLINE',
+                \ untitled#color#get_colorid(a:col0, 1), 'NONE', 'UNDERLINE',
                 \ )
     execute printf("highlight Ignore ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ Ignore_cfg, 'NONE', 'NONE',
@@ -162,30 +162,30 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
                 \ Normal_gfg2, Error_gbg, 'BOLD',
                 \ )
     execute printf("highlight Todo ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col1, 0), 'NONE', 'BOLD,UNDERLINE',
-                \ s:get_colorid(a:col1, 1), 'NONE', 'BOLD,UNDERLINE',
+                \ untitled#color#get_colorid(a:col1, 0), 'NONE', 'BOLD,UNDERLINE',
+                \ untitled#color#get_colorid(a:col1, 1), 'NONE', 'BOLD,UNDERLINE',
                 \ )
 
     " :h highlight-groups
     execute printf("highlight ColorColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ 'NONE', s:get_colorid(a:col1, 0), 'NONE',
-                \ 'NONE', s:get_colorid(a:col1, 1), 'NONE',
+                \ 'NONE', untitled#color#get_colorid(a:col1, 0), 'NONE',
+                \ 'NONE', untitled#color#get_colorid(a:col1, 1), 'NONE',
                 \ )
     execute printf("highlight Conceal ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Cursor ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
-                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ Normal_cfg, untitled#color#get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, untitled#color#get_colorid(a:group_color, 1), 'NONE',
                 \ )
     execute printf("highlight CursorColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg2, s:get_colorid(a:group_color, 0), 'NONE',
-                \ Normal_gfg2, s:get_colorid(a:group_color, 1), 'NONE',
+                \ Normal_cfg2, untitled#color#get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg2, untitled#color#get_colorid(a:group_color, 1), 'NONE',
                 \ )
     execute printf("highlight Directory ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col4, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col4, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col4, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col4, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight DiffAdd ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ Normal_cfg2, DiffAdd_cbg, 'NONE',
@@ -204,56 +204,60 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
                 \ Normal_gfg2, DiffText_gbg, 'NONE',
                 \ )
     execute printf("highlight EndOfBuffer ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:group_color, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:group_color, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:group_color, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:group_color, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight ErrorMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ ErrorMsg_cfg, Normal_cbg, 'NONE',
                 \ ErrorMsg_gfg, Normal_gbg, 'NONE',
                 \ )
     execute printf("highlight VertSplit ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:group_color, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:group_color, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:group_color, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:group_color, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Folded ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
-                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ Normal_cfg, untitled#color#get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, untitled#color#get_colorid(a:group_color, 1), 'NONE',
                 \ )
     execute printf("highlight FoldColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col0, 0), FoldColumn_cbg, 'NONE',
-                \ s:get_colorid(a:col0, 1), FoldColumn_gbg, 'NONE',
+                \ untitled#color#get_colorid(a:col0, 0), FoldColumn_cbg, 'NONE',
+                \ untitled#color#get_colorid(a:col0, 1), FoldColumn_gbg, 'NONE',
                 \ )
     execute printf("highlight SignColumn ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight IncSearch ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Search_cfg, s:get_colorid(a:col5, 0), 'NONE',
-                \ Search_gfg, s:get_colorid(a:col5, 1), 'NONE',
+                \ Search_cfg, untitled#color#get_colorid(a:col5, 0), 'NONE',
+                \ Search_gfg, untitled#color#get_colorid(a:col5, 1), 'NONE',
                 \ )
     execute printf("highlight LineNr ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
-                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ Normal_cfg, untitled#color#get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, untitled#color#get_colorid(a:group_color, 1), 'NONE',
                 \ )
     execute printf("highlight CursorLineNr ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col2, 0), s:get_colorid(a:group_color, 0), 'NONE',
-                \ s:get_colorid(a:col2, 1), s:get_colorid(a:group_color, 1), 'NONE',
+                \ untitled#color#get_colorid(a:col2, 0),
+                \ untitled#color#get_colorid(a:group_color, 0), 'NONE',
+                \ untitled#color#get_colorid(a:col2, 1),
+                \ untitled#color#get_colorid(a:group_color, 1), 'NONE',
                 \ )
     execute printf("highlight MatchParen ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col2, 0), s:get_colorid(a:col1, 0), 'NONE',
-                \ s:get_colorid(a:col2, 1), s:get_colorid(a:col1, 1), 'NONE',
+                \ untitled#color#get_colorid(a:col2, 0),
+                \ untitled#color#get_colorid(a:col1, 0), 'NONE',
+                \ untitled#color#get_colorid(a:col2, 1),
+                \ untitled#color#get_colorid(a:col1, 1), 'NONE',
                 \ )
     execute printf("highlight ModeMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col0, 0), 'NONE', 'BOLD',
-                \ s:get_colorid(a:col0, 1), 'NONE', 'BOLD',
+                \ untitled#color#get_colorid(a:col0, 0), 'NONE', 'BOLD',
+                \ untitled#color#get_colorid(a:col0, 1), 'NONE', 'BOLD',
                 \ )
     execute printf("highlight MoreMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col0, 0), 'NONE', 'BOLD',
-                \ s:get_colorid(a:col0, 1), 'NONE', 'BOLD',
+                \ untitled#color#get_colorid(a:col0, 0), 'NONE', 'BOLD',
+                \ untitled#color#get_colorid(a:col0, 1), 'NONE', 'BOLD',
                 \ )
     execute printf("highlight NonText ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col1, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col1, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col1, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Normal ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ Normal_cfg, Normal_cbg, 'NONE',
@@ -264,28 +268,28 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
                 \ Normal_gfg, Pmenu_gbg, 'NONE',
                 \ )
     execute printf("highlight PmenuSel ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'NONE',
-                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'NONE',
+                \ Normal_cfg, untitled#color#get_colorid(a:group_color, 0), 'NONE',
+                \ Normal_gfg, untitled#color#get_colorid(a:group_color, 1), 'NONE',
                 \ )
     execute printf("highlight PmenuSbar ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:col0, 0), 'NONE',
-                \ Normal_gfg, s:get_colorid(a:col0, 1), 'NONE',
+                \ Normal_cfg, untitled#color#get_colorid(a:col0, 0), 'NONE',
+                \ Normal_gfg, untitled#color#get_colorid(a:col0, 1), 'NONE',
                 \ )
     execute printf("highlight PmenuThumb ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:col2, 0), 'NONE',
-                \ Normal_gfg, s:get_colorid(a:col2, 1), 'NONE',
+                \ Normal_cfg, untitled#color#get_colorid(a:col2, 0), 'NONE',
+                \ Normal_gfg, untitled#color#get_colorid(a:col2, 1), 'NONE',
                 \ )
     execute printf("highlight Question ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col5, 0), 'NONE', 'NONE',
-                \ s:get_colorid(a:col5, 1), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col5, 0), 'NONE', 'NONE',
+                \ untitled#color#get_colorid(a:col5, 1), 'NONE', 'NONE',
                 \ )
     execute printf("highlight Search ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Search_cfg, s:get_colorid(a:col4, 0), 'NONE',
-                \ Search_gfg, s:get_colorid(a:col4, 1), 'NONE',
+                \ Search_cfg, untitled#color#get_colorid(a:col4, 0), 'NONE',
+                \ Search_gfg, untitled#color#get_colorid(a:col4, 1), 'NONE',
                 \ )
     execute printf("highlight SpecialKey ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ s:get_colorid(a:col2, 0), SpecialKey_cbg, 'BOLD',
-                \ s:get_colorid(a:col2, 1), SpecialKey_gbg, 'BOLD',
+                \ untitled#color#get_colorid(a:col2, 0), SpecialKey_cbg, 'BOLD',
+                \ untitled#color#get_colorid(a:col2, 1), SpecialKey_gbg, 'BOLD',
                 \ )
     execute printf("highlight SpellBad ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ Normal_cfg2, SpellBad_cbg, 'NONE',
@@ -304,12 +308,12 @@ function! untitled#set_color#set_color(group_color, col0, col1, col2, col3, col4
                 \ Normal_gfg2, SpellRare_gbg, 'NONE',
                 \ )
     execute printf("highlight Title ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:group_color, 0), 'BOLD',
-                \ Normal_gfg, s:get_colorid(a:group_color, 1), 'BOLD',
+                \ Normal_cfg, untitled#color#get_colorid(a:group_color, 0), 'BOLD',
+                \ Normal_gfg, untitled#color#get_colorid(a:group_color, 1), 'BOLD',
                 \ )
     execute printf("highlight Visual ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
-                \ Normal_cfg, s:get_colorid(a:col2, 0), 'NONE',
-                \ Normal_gfg, s:get_colorid(a:col2, 1), 'NONE',
+                \ Normal_cfg, untitled#color#get_colorid(a:col2, 0), 'NONE',
+                \ Normal_gfg, untitled#color#get_colorid(a:col2, 1), 'NONE',
                 \ )
     execute printf("highlight WarningMsg ctermfg=%s ctermbg=%s cterm=%s guifg=%s guibg=%s gui=%s",
                 \ WarningMsg_cfg, 'NONE', 'NONE',
