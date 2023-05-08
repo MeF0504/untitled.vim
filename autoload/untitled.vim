@@ -203,7 +203,7 @@ function! untitled#get_birthday_color() abort
                 \ g:untitled#groups#vs#miku,
                 \ g:untitled#groups#vs#rin,
                 \ g:untitled#groups#vs#len,
-                \ g:untitled#groups#vs#ruka,
+                \ g:untitled#groups#vs#luka,
                 \ g:untitled#groups#vs#meiko,
                 \ g:untitled#groups#vs#kaito,
                 \ g:untitled#groups#ln#ichika,
