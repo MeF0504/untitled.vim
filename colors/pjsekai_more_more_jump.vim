@@ -12,15 +12,13 @@ let g:colors_name = 'pjsekai_more_more_jump'
 set background=light
 " set background=dark
 
-let s:group_color = [0x78, 0xda, 0x35]
-let s:miku        = [0x63, 0xb2, 0xad]
-let s:rin         = [0xfd, 0xc3, 0x13]
-let s:minori      = [0xfd, 0xc2, 0x9d]
-let s:haruka      = [0x6c, 0x96, 0xc7]
-let s:airi        = [0xfd, 0x94, 0xc1]
-let s:shizuku     = [0x67, 0xac, 0x9c]
+let s:group_color = untitled#groups#mmj#group_color.color
+let s:miku        = untitled#groups#mmj#miku.color
+let s:rin         = untitled#groups#mmj#rin.color
+let s:minori      = untitled#groups#mmj#minori.color
+let s:haruka      = untitled#groups#mmj#haruka.color
+let s:airi        = untitled#groups#mmj#airi.color
+let s:shizuku     = untitled#groups#mmj#shizuku.color
 
-" source <sfile>:h:h/autoload/untitled/set_color.vim
-
-call untitled#set_color#set_color(s:group_color, s:miku, s:rin, s:minori, s:haruka, s:airi, s:shizuku, ['195', '#d7ffff'])
+call untitled#color#set_color(s:group_color, s:miku, s:rin, s:minori, s:haruka, s:airi, s:shizuku, ['195', '#d7ffff'])
 

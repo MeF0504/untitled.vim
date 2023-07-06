@@ -12,15 +12,13 @@ let g:colors_name = 'pjsekai_vivid_bad_squad'
 " set background=light
 set background=dark
 
-let s:group_color = [0xe6, 0x00, 0x53]
-let s:miku        = [0xa6, 0xd3, 0xb9]
-let s:meiko       = [0xd3, 0x2d, 0x34]
-let s:kohane      = [0xfc, 0x4b, 0x89]
-let s:an          = [0x17, 0xad, 0xd4]
-let s:akito       = [0xfc, 0x61, 0x1a]
-let s:toya        = [0x0e, 0x5f, 0xd4]
+let s:group_color = untitled#groups#vbs#group_color.color
+let s:miku        = untitled#groups#vbs#miku.color
+let s:meiko       = untitled#groups#vbs#meiko.color
+let s:kohane      = untitled#groups#vbs#kohane.color
+let s:an          = untitled#groups#vbs#an.color
+let s:akito       = untitled#groups#vbs#akito.color
+let s:toya        = untitled#groups#vbs#toya.color
 
-" source <sfile>:h:h/autoload/untitled/set_color.vim
-
-call untitled#set_color#set_color(s:group_color, s:miku, s:meiko, s:kohane, s:an, s:akito, s:toya, ['235', '#301f1a'])
+call untitled#color#set_color(s:group_color, s:miku, s:meiko, s:kohane, s:an, s:akito, s:toya, ['235', '#301f1a'])
 
