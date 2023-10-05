@@ -236,7 +236,7 @@ function! untitled#get_birthday_color() abort
             let col = birthdays[today]
             let gcol = untitled#color#get_colorid(col, 1)
             let ccol = untitled#color#get_colorid(col, 0)
-            return {'gui': gcol, 'cterm': ccol}
+            return {'gui': gcol, 'cterm': ccol, 'RGB': col}
         endif
     endfor
     return {}
