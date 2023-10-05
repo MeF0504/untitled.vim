@@ -20,9 +20,13 @@ echo has('popupwin')  " == 1
 
 ## Installation
 
-If you use dein,
+If you use [dein](https://github.com/Shougo/dein.vim),
 ```vim
 call dein#add('MeF0504/untitled.vim')
+```
+[vim-plug](https://github.com/junegunn/vim-plug),
+```vim
+Plug 'MeF0504/untitled.vim'
 ```
 or do something like this.
 
@@ -34,3 +38,6 @@ Untitled
 ```
 will lead you to your "sekai"
 
+## TODO
+
+* Recreate the new effect in this plugin.
