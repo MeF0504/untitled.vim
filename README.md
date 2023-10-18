@@ -41,3 +41,4 @@ will lead you to your "sekai"
 ## TODO
 
 * Recreate the new effect in this plugin.
+* Support sound effect (maybe..)
